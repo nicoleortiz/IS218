@@ -28,7 +28,7 @@ img.background {
 }
 
 .box {
-	width: 40%;
+	width: 60%;
 	height: 50%;
 	background: rgba(255, 255, 255, .5);
 	border-radius: 25px;
@@ -38,6 +38,7 @@ img.background {
 	line-height: 20px;
 	color: blue;
 	text-shadow: none;
+	padding-bottom: 50px;
 }
 p {
 	padding: 10px;
@@ -48,4 +49,10 @@ a {
 	padding: 5px 10px;
 	border: 1px solid black;
 	border-radius: 25px;
+}
+tr {
+	padding: 10px;
+}
+td {
+	padding: 10px;
 }
