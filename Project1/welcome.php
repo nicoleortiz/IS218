@@ -24,6 +24,10 @@
    $passwordlog = $_POST['passwordlog'];
    
    $current = " ";
+   $cfn = " ";
+   $cln = " ";
+   
+   $check = " ";
 ?>
 
 <!DOCTYPE html>
@@ -53,9 +57,12 @@
                               $sql = "SELECT * FROM accounts WHERE email='$emaillog'";
                               foreach ($db->query($sql) as $show){
                                   $current = $show['password'];
+                                  $cfn = $show['fname'];
+                                  $cln = $show['lname'];
                               }
                               
                               if ($current == $passwordlog) {
+                                echo "<p>Hello ".$cfn." ".$cln."!</p><br>";
                                 echo "<p>Welcome to Aweless Agencies</p>";
                               }
                               else if ($current == " ") {
@@ -67,12 +74,22 @@
                             ?>
                         </div>
 
-                        <div id="register" class="animate form">
+                        <div id="register" class="animate form" align="center">
                             <?php
-                                $sql = "INSERT INTO accounts (email, fname, lname, phone, birthday, gender, password)
-                                        VALUES ('$email', '$fname', '$lname', '$phone', '$birthday', '$gender', '$password')";
-                                $db->exec($sql);
-                                echo "<p>Thank You For Registering</p>";
+                                $sql = "SELECT * FROM accounts WHERE email='$email'";
+                                foreach ($db->query($sql) as $show){
+                                  $check = $show['email'];
+                                }
+                                
+                                if($check == $email){
+                                  echo "<p>That email is being used.<br>Please login or enter a new email.</p>";
+                                }
+                                else {
+                                  $sql = "INSERT INTO accounts (email, fname, lname, phone, birthday, gender, password)
+                                          VALUES ('$email', '$fname', '$lname', '$phone', '$birthday', '$gender', '$password')";
+                                  $db->exec($sql);
+                                  echo "<p>Thank You For Registering</p>";
+                                }
                             ?>
                         </div>
                     </div>
