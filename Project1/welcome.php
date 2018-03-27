@@ -1,9 +1,32 @@
+<?php
+	/*PART ONE*/
+	$dsn = 'mysql:host=sql2.njit.edu;dbname=no59';
+	$username = 'no59';
+	$password = 'H4KgQWKp';
+	
+	try {
+		$db = new PDO($dsn, $username, $password);
+	}
+	catch (PDOException $e) {
+		$error_message = $e->getMessage();
+		echo 'Database Connection Error';
+	}
+ 
+   $fname = $_POST['fname'];
+   $lname = $_POST['lname'];
+   $email = $_POST['email'];
+   $phone = $_POST['phone'];
+   $birthday = $_POST['birthday'];
+   $gender = $_POST['gender'];
+   $password = $_POST['password'];
+   
+   $emaillog = $_POST['emaillog'];
+   $passwordlog = $_POST['passwordlog'];
+   
+   $current = " ";
+?>
+
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="UTF-8" />
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
@@ -22,16 +45,35 @@
             </header>
             <section>			
                 <div id="container_demo" >
-                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
                     <a class="hiddenanchor" id="toregister"></a>
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
-                        <div id="login" class="animate form">
-                            <p>welcome</p>
+                        <div id="login" class="animate form" align="center">
+                            <?php
+                              $sql = "SELECT * FROM accounts WHERE email='$emaillog'";
+                              foreach ($db->query($sql) as $show){
+                                  $current = $show['password'];
+                              }
+                              
+                              if ($current == $passwordlog) {
+                                echo "<p>Welcome to Aweless Agencies</p>";
+                              }
+                              else if ($current == " ") {
+                                echo "<p>Email Not Found</p>";
+                              }
+                              else {
+                                echo "<p>Incorrect Password</p>";
+                              }
+                            ?>
                         </div>
 
                         <div id="register" class="animate form">
-                            <p>Thank You For Registering</p>
+                            <?php
+                                $sql = "INSERT INTO accounts (email, fname, lname, phone, birthday, gender, password)
+                                        VALUES ('$email', '$fname', '$lname', '$phone', '$birthday', '$gender', '$password')";
+                                $db->exec($sql);
+                                echo "<p>Thank You For Registering</p>";
+                            ?>
                         </div>
                     </div>
                 </div>  
@@ -39,3 +81,6 @@
         </div>
     </body>
 </html>
+<?php
+  $db = null;
+?>
