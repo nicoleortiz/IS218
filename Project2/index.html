@@ -1,0 +1,23 @@
+<?php
+	$dsn = 'mysql:host=sql2.njit.edu;dbname=no59';
+	$username = 'no59';
+	$password = 'H4KgQWKp';
+	
+	try {
+		$db = new PDO($dsn, $username, $password);
+	}
+	catch (PDOException $e) {
+		echo 'Database Connection Error';
+	}
+?>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome</title>
+		<link rel="stylesheet" href="css/style2.css">
+  </head>
+  <body>
+    <p>Welcome!</p>
+  </body>
+</html>
