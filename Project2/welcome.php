@@ -1,4 +1,6 @@
 <?php
+  session_start();
+  
 	/*PART ONE*/
 	$dsn = 'mysql:host=sql2.njit.edu;dbname=no59';
 	$username = 'no59';
@@ -23,13 +25,16 @@
    $cn = " ";
    
    $check = " ";
+   
+   $_SESSION['user']=$user;
+   $_SESSION['listnum']=0;
 ?>
 
 <!DOCTYPE html>
     <head>
         <meta charset="UTF-8" />
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
-        <title>Welcome Bands</title>
+        <title>Keep Track, Simply</title>
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -39,7 +44,7 @@
         <div class="container">
             <section>
               <div style="float: left; width: 50%; padding-top: 5%; color: #fafafa; text-shadow: 0 0 5px #404040;">
-                <h1 style="font-size: 80px; ">Keep Track Of Your To-Do's.</h1>
+                <h1 style="font-size: 80px;">Keep Track Of Your To-Do.</h1>
                 <br><br>
                 <h1 style="font-size: 100px;">Simply.</h1>
                 <br><br><br><br><br>
@@ -61,7 +66,7 @@
                               
                               if ($current == $pass) {
                                 ?>
-                                <meta http-equiv="refresh" content="0; URL=index.html">
+                                <meta http-equiv="refresh" content="0; URL=index.php">
                                 <?php
                               }
                               else if ($current == " ") {
